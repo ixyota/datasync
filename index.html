@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модуль Импорта/Экспорта Данных</title>
+    <meta name="description" content="Разработка универсального модуля импорта/экспорта данных (Excel, CSV) - быстрое, надежное и удобное решение.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- SheetJS для реального чтения, парсинга и выгрузки Excel / CSV файлов -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            DataSync Pro
+        </div>
+        <nav class="nav">
+            <a href="#features">Возможности</a>
+            <a href="#demo">Лаборатория</a>
+            <a href="#contact">Контакты</a>
+            <button class="btn-primary">Начать работу</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge">🔥 Инновация 2026 года</div>
+                <h1>Модуль <br><span class="gradient-text">Импорта и Экспорта</span></h1>
+                <p>Бесшовная интеграция данных. Поддержка Excel (.xlsx, .xls) и CSV. Теперь с функцией «на лету» конвертации и редактирования ваших данных!</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Протестировать</button>
+                    <button class="btn-secondary">Документация</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-file excel">
+                    <span class="file-ext">.XLSX</span>
+                </div>
+                <div class="floating-file csv">
+                    <span class="file-ext">.CSV</span>
+                </div>
+                <div class="floating-file db">
+                    <span class="file-ext">DB</span>
+                </div>
+                <div class="glow-orb"></div>
+            </div>
+        </section>
+
+        <section id="demo" class="demo-section">
+            <div class="section-headers">
+                <h2>Интерактивная Лаборатория</h2>
+                <p>Загрузите настоящий файл (CSV или Excel), измените его на лету и скачайте результат!</p>
+            </div>
+            <div class="workspace-container">
+                <div class="glass-panel uploader" id="step-upload">
+                    <h3>1. Загрузка данных</h3>
+                    <div class="drop-zone" id="drop-zone">
+                        <div class="upload-icon">📁</div>
+                        <p>Перетащите реальный файл сюда или нажмите для выбора</p>
+                        <span>Поддерживаются: .csv, .xlsx</span>
+                        <input type="file" id="file-input" hidden accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    </div>
+                    <div class="upload-status" id="upload-status"></div>
+                </div>
+
+                <div class="glass-panel editor" id="step-editor" style="display: none;">
+                    <div class="editor-header">
+                        <h3>2. Трансформация данных</h3>
+                        <div class="editor-actions">
+                            <button class="btn-tool" id="tool-uppercase">🔠 CAPS LOCK текст</button>
+                            <button class="btn-tool" id="tool-add-col">➕ Добавить метку времени</button>
+                            <button class="btn-tool" id="tool-reset">🔄 Отменить изменения</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="data-table">
+                            <thead><tr id="table-head"></tr></thead>
+                            <tbody id="table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glass-panel exporter" id="step-export" style="display: none;">
+                    <h3>3. Конвертация форматов и Экспорт</h3>
+                    <p>Сохраните трансформированные данные (например загрузили CSV - выгрузили Excel)</p>
+                    <div class="export-options">
+                        <button class="export-btn" data-type="excel">
+                            <span class="icon">📊</span>
+                            Скачать Excel (.xlsx)
+                        </button>
+                        <button class="export-btn" data-type="csv">
+                            <span class="icon">📝</span>
+                            Скачать CSV (.csv)
+                        </button>
+                    </div>
+                    <div class="export-status" id="export-status"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="section-headers">
+                <h2>Ключевые Возможности</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Молниеносный парсинг</h3>
+                    <p>Парсинг данных из загруженного файла прямо в браузере без серверов.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Умная трансформация</h3>
+                    <p>Применяйте изменения ко всем файлам и модифицируйте структуру перед экспортом в пару кликов.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Мост между форматами</h3>
+                    <p>Конвертируйте CSV в Excel с помощью настоящего SheetJS ядра.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Реальная выгрузка</h3>
+                    <p>Создание готового к работе файла с настоящим скачиванием в браузере.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="contact">
+        <p>&copy; 2026 DataSync Pro. Разработка интерактивных модулей.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
